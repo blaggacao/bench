@@ -34,22 +34,14 @@
 
         
           propagatedBuildInputs = [
+            gcc # needed to compile frappe dependency 'hiredis' on install
             coreutils
-            gitMinimal
-            # non-python runtime deps
-            redis
-            nodejs
-            mariadb
-            postgresql
-            yarn
-            cron
+            yarn # used for installing node packages
             # wkhtmltopdf - has unmaintained dep; pdf printing not available out of the box
             # https://github.com/frappe/bench/issues/1427
-            nginx
           ] ++ (with python3.pkgs; [
             # for bench's own environment management
             pip
-            supervisor
             psutil
             # other
             click
