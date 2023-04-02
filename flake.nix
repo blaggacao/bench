@@ -59,6 +59,10 @@
           nativeBuildInputs = with python3.pkgs; [
             hatchling
           ];
+
+          postInstall = ''
+            install -dm755 $src/bench/config/templates $out/templates
+          '';
         
           pythonImportsCheck = [ "bench" ];
         
