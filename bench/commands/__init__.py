@@ -114,6 +114,13 @@ if not os.environ.get("NIX_WRAPPED"):
 	from bench.commands.setup import setup
 
 	bench_command.add_command(setup)
+else:
+	# Requirements setup is still relevant since
+	# Nix delegates and trusts the app-manages
+	# pyenvs
+	from bench.commands.setup import setup_requirements
+
+	bench_command.add_command(setup_requirements)
 
 
 from bench.commands.config import config
