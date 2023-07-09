@@ -61,10 +61,17 @@
           ];
 
           postInstall = ''
-            install -dm755 $src/bench/config/templates $out/templates
+            mkdir -p $out/templates
+            cp $src/bench/config/templates/*.{htm,html} $out/templates
+            cp $src/bench/patches/patches.txt $out
           '';
         
           pythonImportsCheck = [ "bench" ];
+
+          passthru = {
+            # used for bootstrapping ./env
+            python = python3.withPackages (p: [p.pip]);
+          };
         
           meta = with lib; {
             description = "CLI to manage Multi-tenant deployments for Frappe apps";
