@@ -87,3 +87,23 @@ def get_max_redis_memory():
 	except ValueError:
 		max_mem = int(subprocess.check_output(["sysctl", "-n", "hw.memsize"]).strip())
 	return max(50, int((max_mem / (1024.0**2)) * 0.05))
+
+def main(bench_path):
+	generate_config(bench_path)
+
+if __name__ == "__main__":
+	import argparse
+	parser = argparse.ArgumentParser(
+		description="Configure the redis configuration files for the bench.",
+		usage="""
+		python -m bench.config.redis <bench_path>
+
+		<bench_path> : The path to the bench directory.
+		"""
+	)
+
+	parser.add_argument("bench_path", help="The path to the bench directory.")
+
+	args = parser.parse_args()
+
+	main(args.bench_path)

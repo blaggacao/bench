@@ -142,3 +142,24 @@ def make_pid_folder(bench_path):
 	pids_path = os.path.join(bench_path, "config", "pids")
 	if not os.path.exists(pids_path):
 		os.makedirs(pids_path)
+
+
+def main(bench_path):
+	setup_config(bench_path)
+
+if __name__ == "__main__":
+	import argparse
+	parser = argparse.ArgumentParser(
+		description="Configure the common_site_config file for the bench.",
+		usage="""
+		python -m bench.config.common_site_config <bench_path>
+
+		<bench_path> : The path to the bench directory.
+		"""
+	)
+
+	parser.add_argument("bench_path", help="The path to the bench directory.")
+
+	args = parser.parse_args()
+
+	main(args.bench_path)
